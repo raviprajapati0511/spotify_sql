@@ -8,7 +8,9 @@ Run this after 01_schema_setup.sql.
 */
 
 -- 1. Inspect rows with NULL values before cleaning.
-SELECT *
+-- The Kaggle CSV has thousands of rows, so keep this diagnostic compact.
+SELECT
+    COUNT(*) AS rows_with_null_values
 FROM spotify
 WHERE artist IS NULL
    OR track IS NULL
@@ -34,6 +36,45 @@ WHERE artist IS NULL
    OR stream IS NULL
    OR energy_liveness IS NULL
    OR most_playedon IS NULL;
+
+SELECT
+    spotify_id,
+    artist,
+    track,
+    album,
+    title,
+    channel,
+    views,
+    likes,
+    comments,
+    stream
+FROM spotify
+WHERE artist IS NULL
+   OR track IS NULL
+   OR album IS NULL
+   OR album_type IS NULL
+   OR danceability IS NULL
+   OR energy IS NULL
+   OR loudness IS NULL
+   OR speechiness IS NULL
+   OR acousticness IS NULL
+   OR instrumentalness IS NULL
+   OR liveness IS NULL
+   OR valence IS NULL
+   OR tempo IS NULL
+   OR duration_min IS NULL
+   OR title IS NULL
+   OR channel IS NULL
+   OR views IS NULL
+   OR likes IS NULL
+   OR comments IS NULL
+   OR licensed IS NULL
+   OR official_video IS NULL
+   OR stream IS NULL
+   OR energy_liveness IS NULL
+   OR most_playedon IS NULL
+ORDER BY spotify_id
+LIMIT 20;
 
 -- 2. Remove rows with missing analytic values.
 DELETE FROM spotify
